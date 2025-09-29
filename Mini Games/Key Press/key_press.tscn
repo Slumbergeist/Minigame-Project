@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbnhfof5bpcet"]
+
+[ext_resource type="Script" uid="uid://do7nqm1tqmius" path="res://Mini Games/Key Press/key_press.gd" id="1_s8g6r"]
+[ext_resource type="PackedScene" uid="uid://brj22jt66f6ps" path="res://Objects/key_qte.tscn" id="2_vfnxi"]
+
+[node name="MG-Key_Press" type="Node2D"]
+script = ExtResource("1_s8g6r")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="KeyQTE" parent="." groups=["Active QTEs"] instance=ExtResource("2_vfnxi")]
+
+[node name="KeyQTE2" parent="." groups=["Active QTEs"] instance=ExtResource("2_vfnxi")]
+offset_left = 300.0
+offset_right = 556.0
+speed = 5.0
+key = "peek_L"
+
+[node name="KeyQTE3" parent="." groups=["Active QTEs"] instance=ExtResource("2_vfnxi")]
+offset_left = 600.0
+offset_right = 856.0
+speed = 5.0
+key = "down"
+
+[connection signal="qte_success" from="." to="KeyQTE" method="_on_key_qte_success"]

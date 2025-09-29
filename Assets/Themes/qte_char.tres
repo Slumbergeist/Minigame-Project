@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://yq4wx0ey7r15"]
+
+[ext_resource type="FontFile" uid="uid://b6mgvfr8x6u4i" path="res://Assets/Fonts/CalSans-Regular.ttf" id="1_5oj1n"]
+
+[resource]
+default_font = ExtResource("1_5oj1n")
+default_font_size = 80
+RichTextLabel/colors/default_color = Color(0.12591085, 0.12591082, 0.12591088, 1)
+RichTextLabel/colors/font_outline_color = Color(1, 1, 1, 1)
