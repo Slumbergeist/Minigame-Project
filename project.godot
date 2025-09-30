@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Minigame Tests"
-run/main_scene="uid://cbnhfof5bpcet"
+run/main_scene="uid://8lo1mpt04jfk"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Util="*res://Extra/util.gd"
 
 [gui]
 

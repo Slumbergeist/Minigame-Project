@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://0qtaj42dqd31" path="res://Assets/Textures/key_bottom.png" id="1_y7agk"]
 [ext_resource type="Texture2D" uid="uid://c3s1ye77jayd1" path="res://Assets/Textures/key_surface.png" id="2_51a43"]
 [ext_resource type="Texture2D" uid="uid://bbjcesj2ig6lw" path="res://Assets/Textures/key_fill.png" id="3_27dg3"]
-[ext_resource type="Script" uid="uid://dop646388y4mu" path="res://Objects/key_qte.gd" id="4_27dg3"]
+[ext_resource type="Script" uid="uid://dop646388y4mu" path="res://Mini Games/Key QTE/Objects/key_qte.gd" id="4_27dg3"]
 [ext_resource type="Theme" uid="uid://yq4wx0ey7r15" path="res://Assets/Themes/qte_char.tres" id="4_51a43"]
 [ext_resource type="AudioStream" uid="uid://ihvk0tbg4xlk" path="res://Assets/Audio/success.wav" id="6_najr6"]
 [ext_resource type="AudioStream" uid="uid://chlpok2poqm7f" path="res://Assets/Audio/fail.wav" id="7_ht7xx"]

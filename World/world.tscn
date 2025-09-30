@@ -1,3 +1,19 @@
-[gd_scene format=3 uid="uid://8lo1mpt04jfk"]
+[gd_scene load_steps=3 format=3 uid="uid://8lo1mpt04jfk"]
 
-[node name="World" type="Node2D"]
+[ext_resource type="PackedScene" uid="uid://cbnhfof5bpcet" path="res://Mini Games/Key QTE/MG-QTE.tscn" id="1_62w18"]
+[ext_resource type="PackedScene" uid="uid://cy1igxpvtoljj" path="res://Mini Games/Key Mash/MG-Mash.tscn" id="2_8a836"]
+
+[node name="MiniGameDisplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MG-QTE" parent="." instance=ExtResource("1_62w18")]
+layout_mode = 1
+game_enabled = false
+
+[node name="MG-Mash" parent="." instance=ExtResource("2_8a836")]
+layout_mode = 1

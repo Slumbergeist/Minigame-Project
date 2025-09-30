@@ -2,9 +2,8 @@ extends TextureProgressBar
 
 @export var speed: float = 3.0
 @export_enum("up", "down", "left", "right", "fast", "leap", "slow", "peek_L", "peek_R") var key: String = "up"
-@export_enum("Unresolved", "Succeeded", "Failed") var result: String = "Unresolved"
 
-@onready var game_controller: Control = $"../.."
+@onready var game_controller: Control = $"../../."
 @onready var text_edit: RichTextLabel = $TextEdit
 @onready var timer: Timer = $Timer
 @onready var se_success: AudioStreamPlayer = $Success
@@ -20,11 +19,9 @@ func _ready() -> void:
 	game_controller.qte_success.connect(qte_key_success)
 
 	# Setting up Key display text
-	var actionEvent = InputMap.action_get_events(key)
-	var actionEventIndex = actionEvent[0]
-	var keyName = OS.get_keycode_string(actionEventIndex.physical_keycode)
-	key_literal = keyName
-	text_edit.text = keyName
+	var key_name = Util.action_to_keycode(key)
+	key_literal = key_name
+	text_edit.text = key_name
 	
 	# Setting up timer and progress bar
 	value = speed * 100
@@ -38,19 +35,17 @@ func _on_timer_timeout() -> void:
 	eventFailure()
 
 func eventFailure() -> void:
-	tint_over = "#aa0022a2"
+	tint_over = Util.failure_color
 	qte_instance_failure.emit()
 	se_failure.play()
-	result = "Failed"
 	await se_failure.finished
 	queue_free()
 	
 func eventSuccess() -> void:
 	timer.stop()
-	tint_over = "#237d00ad"
+	tint_over = Util.success_color
 	qte_instance_success.emit()
 	se_success.play()
-	result = "Succeeded"
 	await se_success.finished
 	queue_free()
 

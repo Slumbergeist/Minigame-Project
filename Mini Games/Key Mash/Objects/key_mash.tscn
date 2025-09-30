@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsyhucp8ei4pm"]
+
+[ext_resource type="Texture2D" uid="uid://0qtaj42dqd31" path="res://Assets/Textures/key_bottom.png" id="1_fcnhv"]
+[ext_resource type="Texture2D" uid="uid://c3s1ye77jayd1" path="res://Assets/Textures/key_surface.png" id="2_rrr5c"]
+[ext_resource type="Texture2D" uid="uid://dspicsk5bv86p" path="res://Assets/Textures/key_charge.png" id="3_y2nhi"]
+[ext_resource type="Script" uid="uid://bqp868vuqb8tj" path="res://Mini Games/Key Mash/Objects/key_mash.gd" id="4_rrr5c"]
+[ext_resource type="Theme" uid="uid://yq4wx0ey7r15" path="res://Assets/Themes/qte_char.tres" id="4_u34s1"]
+[ext_resource type="AudioStream" uid="uid://ihvk0tbg4xlk" path="res://Assets/Audio/success.wav" id="6_u34s1"]
+[ext_resource type="AudioStream" uid="uid://chlpok2poqm7f" path="res://Assets/Audio/fail.wav" id="7_w7yyv"]
+
+[node name="KeyMash" type="TextureProgressBar"]
+offset_right = 256.0
+offset_bottom = 256.0
+scale = Vector2(0.5, 0.5)
+fill_mode = 8
+texture_under = ExtResource("1_fcnhv")
+texture_over = ExtResource("2_rrr5c")
+texture_progress = ExtResource("3_y2nhi")
+script = ExtResource("4_rrr5c")
+
+[node name="TextEdit" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -83.0
+offset_right = 64.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_u34s1")
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Success" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_u34s1")
+
+[node name="Failure" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_w7yyv")
+volume_db = -18.116
+
+[connection signal="value_changed" from="." to="." method="_on_value_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
