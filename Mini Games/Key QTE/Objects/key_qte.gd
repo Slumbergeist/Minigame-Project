@@ -1,7 +1,7 @@
 extends TextureProgressBar
 
-@export var speed: float = 3.0
-@export_enum("up", "down", "left", "right", "fast", "leap", "slow", "peek_L", "peek_R") var key: String = "up"
+var speed: float
+var key: String
 
 @onready var game_controller: Control = $"../../."
 @onready var text_edit: RichTextLabel = $TextEdit

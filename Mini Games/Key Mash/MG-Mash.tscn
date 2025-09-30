@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cy1igxpvtoljj"]
 
-[ext_resource type="PackedScene" uid="uid://bsyhucp8ei4pm" path="res://Mini Games/Key Mash/Objects/key_mash.tscn" id="1_xdtwy"]
+[ext_resource type="Script" uid="uid://bt6ia18ixsnuq" path="res://Mini Games/Key Mash/MG-Mash.gd" id="1_7yyrr"]
 
 [node name="MG-Mash" type="Control"]
 layout_mode = 3
@@ -9,6 +9,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_7yyrr")
+game_enabled = true
 
 [node name="Mash Container" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -22,6 +24,3 @@ offset_top = -256.0
 offset_right = 128.0
 grow_horizontal = 2
 grow_vertical = 0
-
-[node name="KeyMash" parent="Mash Container" instance=ExtResource("1_xdtwy")]
-layout_mode = 2

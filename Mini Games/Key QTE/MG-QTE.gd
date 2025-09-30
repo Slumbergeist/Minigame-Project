@@ -1,13 +1,13 @@
 extends Control
 
-# TODO: Check if randomly selected key is pre-existing
+# TODO: Check if randomly selected key is pre-existing (i.e. no duplicates)
 
 ## Frequency determines the time in-between key press events
 @export var frequency: float = 1.0
 ## Speed determines how much time the QTE will be active
-@export var speed: float = 1.0
+@export var speed: float = 2.0
 ## Amount caps how many times a QTE will appear
-@export var amount: int = 1
+@export var amount: int = 5
 ## Game Enabled being set to true will begin the spawn timer. False turns off new QTEs
 @export var game_enabled: bool = false
 
