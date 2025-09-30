@@ -1,23 +1,27 @@
-extends Node2D
+extends Control
 
 ## Frequency determines the time in-between key press events
-@export var frequency = 3
-@export var speed = 3
+@export var frequency: float = 1.0
+## Speed determines how much time the QTE will be active
+@export var speed: float = 1.0
+## Amount caps how many times a QTE will appear
+@export var amount: int = 1
+## Game Enabled being set to true will begin the spawn timer. False turns off new QTEs
+@export var game_enabled: bool = false
 
 @onready var timer: Timer = $Timer
 @onready var qte_event: PackedScene = preload("res://Objects/key_qte.tscn")
+@onready var qte_container: HBoxContainer = $"QTE Container"
 
 signal qte_success(qte_cleared: TextureProgressBar)
 
 var valid_qte_actions = ["up", "down", "left", "right", "peek_L", "peek_R"]
+var rng = RandomNumberGenerator.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	timer.wait_time = frequency
-	randi_range(0, 10)
-
-# process. if timer is stopped, start timer with random time (relative to frequency)
-# this creates new qte via add_new_qte()
+	if game_enabled:
+		timer_cycle()
 
 func _input(event) -> void:
 	if event is InputEventKey:
@@ -34,11 +38,16 @@ func scan_active_qtes(key: String) -> void:
 
 func add_new_qte() -> void:
 	var new_qte = qte_event.instantiate()
-	# Set random position (check for existing qte positions)
-	new_qte.speed = 5 # Randomize according to self.speed
-	new_qte.key = "up" # Randomize according to valid_qte_actions Array
+	new_qte.speed = rng.randf_range((speed / 1.5), (speed * 1.5))
+	new_qte.key = valid_qte_actions[rng.randi_range(0, (valid_qte_actions.size() - 1))]
 	new_qte.add_to_group("Active QTEs")
+	qte_container.add_child(new_qte)
 	
-# Create randomization for how often a new QTE pops up using frequency (0 meaning never again)
-# QTE auto-creator, randomization also should be able to randomly pick what key should be pressed and vary speed
-# Create formula for positioning qtes without overlapping or going OoB
+func timer_cycle() -> void:
+	add_new_qte()
+	amount -= 1
+	if amount > 0:
+		timer.start(rng.randf_range((frequency / 1.5), (frequency * 1.5)))
+	
+func _on_timer_timeout() -> void:
+	timer_cycle()

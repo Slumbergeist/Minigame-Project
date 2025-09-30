@@ -1,26 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbnhfof5bpcet"]
+[gd_scene load_steps=2 format=3 uid="uid://cbnhfof5bpcet"]
 
 [ext_resource type="Script" uid="uid://do7nqm1tqmius" path="res://Mini Games/Key Press/key_press.gd" id="1_s8g6r"]
-[ext_resource type="PackedScene" uid="uid://brj22jt66f6ps" path="res://Objects/key_qte.tscn" id="2_vfnxi"]
 
-[node name="MG-Key_Press" type="Node2D"]
+[node name="MG-Key_Press" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_s8g6r")
+amount = 5
+game_enabled = true
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="KeyQTE" parent="." groups=["Active QTEs"] instance=ExtResource("2_vfnxi")]
+[node name="QTE Container" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -256.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
 
-[node name="KeyQTE2" parent="." groups=["Active QTEs"] instance=ExtResource("2_vfnxi")]
-offset_left = 300.0
-offset_right = 556.0
-speed = 5.0
-key = "peek_L"
-
-[node name="KeyQTE3" parent="." groups=["Active QTEs"] instance=ExtResource("2_vfnxi")]
-offset_left = 600.0
-offset_right = 856.0
-speed = 5.0
-key = "down"
-
-[connection signal="qte_success" from="." to="KeyQTE" method="_on_key_qte_success"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

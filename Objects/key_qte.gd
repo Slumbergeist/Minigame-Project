@@ -4,11 +4,14 @@ extends TextureProgressBar
 @export_enum("up", "down", "left", "right", "fast", "leap", "slow", "peek_L", "peek_R") var key: String = "up"
 @export_enum("Unresolved", "Succeeded", "Failed") var result: String = "Unresolved"
 
-@onready var game_controller: Node2D = $".."
+@onready var game_controller: Control = $"../.."
 @onready var text_edit: RichTextLabel = $TextEdit
 @onready var timer: Timer = $Timer
 @onready var se_success: AudioStreamPlayer = $Success
 @onready var se_failure: AudioStreamPlayer = $Failure
+
+signal qte_instance_success()
+signal qte_instance_failure()
 
 var key_literal
 
@@ -36,6 +39,7 @@ func _on_timer_timeout() -> void:
 
 func eventFailure() -> void:
 	tint_over = "#aa0022a2"
+	qte_instance_failure.emit()
 	se_failure.play()
 	result = "Failed"
 	await se_failure.finished
@@ -44,6 +48,7 @@ func eventFailure() -> void:
 func eventSuccess() -> void:
 	timer.stop()
 	tint_over = "#237d00ad"
+	qte_instance_success.emit()
 	se_success.play()
 	result = "Succeeded"
 	await se_success.finished
