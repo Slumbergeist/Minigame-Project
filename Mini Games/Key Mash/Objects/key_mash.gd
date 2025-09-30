@@ -9,7 +9,9 @@ var time_limit: float
 var switch: bool
 var frequency: float
 
-@onready var timer: Timer = $Timer
+@onready var fail_timer_bar: TextureProgressBar = $"Visual Fail Timer"
+@onready var fail_timer: Timer = $"Fail Timer"
+@onready var frequency_timer: Timer = $"Frequency Timer"
 @onready var text_edit: RichTextLabel = $TextEdit
 @onready var se_success: AudioStreamPlayer = $Success
 @onready var se_failure: AudioStreamPlayer = $Failure
@@ -19,6 +21,8 @@ signal mash_instance_success()
 ## Emitted when an instance of the key mashing minigame is failed 
 signal mash_instance_failure()
 
+var rng = RandomNumberGenerator.new()
+
 var key: String = Util.random_action_selector()
 # Enables the effect of the strength variable
 var strength_active: bool = true
@@ -27,9 +31,13 @@ var decay_active: bool = true
 
 func _ready() -> void:
 	text_edit.text = Util.action_to_keycode(key)
-	timer.start(time_limit)
+	if switch:
+		key_cycle()
+	fail_timer.start(time_limit)
+	fail_timer_bar.max_value = time_limit * 100
 	
 func _process(delta: float) -> void:
+	fail_timer_bar.value = fail_timer.time_left * 100
 	if decay_active:
 		decay_progress()
 
@@ -50,20 +58,32 @@ func boost_progress() -> void:
 func decay_progress() -> void:
 	value -= decay
 
-# If the timer runs out, the player fails
-func _on_timer_timeout() -> void:
+## If switch is active, key_cycle resets the timer after each switch
+func key_cycle() -> void:
+	frequency_timer.start(rng.randf_range((frequency / 0.5), (frequency * 0.5)))
+
+# If the FAIL timer runs out, the player fails
+func _on_fail_timer_timeout() -> void:
 	mash_failure()
+
+# If switch is active, upon frequency_timer timout, gets a new random key to press
+func _on_frequency_timer_timeout() -> void:
+	if switch:
+		key = Util.random_action_selector() 
+		text_edit.text = Util.action_to_keycode(key)
+		key_cycle()
 
 func _on_value_changed(value: float) -> void:
 	# If the progress bar value maxes out, the player succeeds
 	if value == max_value:
-		timer.stop()
+		fail_timer.stop()
 		mash_success()
 
 ## On success, it freezes any more game progress, emits the success signal, and then disappears
 func mash_success() -> void:
 	decay_active = false
 	strength_active = false
+	frequency_timer.stop()
 	tint_over = Util.success_color
 	mash_instance_success.emit()
 	se_success.play()
@@ -74,6 +94,7 @@ func mash_success() -> void:
 func mash_failure() -> void:
 	decay_active = false
 	strength_active = false
+	frequency_timer.stop()
 	tint_over = Util.failure_color
 	mash_instance_failure.emit()
 	se_failure.play()

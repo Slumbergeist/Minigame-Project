@@ -37,7 +37,7 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Fail Timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="Success" type="AudioStreamPlayer" parent="."]
@@ -47,5 +47,21 @@ stream = ExtResource("6_u34s1")
 stream = ExtResource("7_w7yyv")
 volume_db = -18.116
 
+[node name="Frequency Timer" type="Timer" parent="."]
+
+[node name="Visual Fail Timer" type="TextureProgressBar" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.1, 1.1)
+value = 100.0
+fill_mode = 8
+radial_initial_angle = 180.0
+texture_progress = ExtResource("3_y2nhi")
+texture_progress_offset = Vector2(-10, -10)
+tint_progress = Color(0.56078434, 0.9764706, 0, 0.8666667)
+
 [connection signal="value_changed" from="." to="." method="_on_value_changed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Fail Timer" to="." method="_on_fail_timer_timeout"]
+[connection signal="timeout" from="Frequency Timer" to="." method="_on_frequency_timer_timeout"]

@@ -1,18 +1,15 @@
 extends Control
 
-# TODO: Add ability for key switching and its frequency
-# TODO: Consider adding visible timer
-
 ## Strength determines how much progress is made every key press
 @export var strength: float = 10.0
 ## Decay determines how quickly the progress regresses without player activity
-@export var decay: float = 1.0
+@export var decay: float = 1.5
 ## Time limit determines how long the player has to fill the meter before they fail
-@export var time_limit: float = 3.0
+@export var time_limit: float = 7.0
 ## Switch determines whether the key to be pressed changes throughout or not
 @export var switch: bool = true
 ## Only applicable if switch = true. Frequency determines how often the key will change
-@export var frequency: float = 2.0
+@export var frequency: float = 1.5
 ## Enables the game to load
 @export var game_enabled: bool = false
 
