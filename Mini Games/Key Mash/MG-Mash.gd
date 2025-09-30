@@ -19,11 +19,11 @@ extends Control
 @onready var mash_container: HBoxContainer = $"Mash Container"
 @onready var mash_event: PackedScene = preload("res://Mini Games/Key Mash/Objects/key_mash.tscn")
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if game_enabled:
 		add_new_mash()
 
+## Creates a new instance of the mash minigame based on above variables
 func add_new_mash() -> void:
 	var new_mash = mash_event.instantiate()
 	new_mash.strength = strength

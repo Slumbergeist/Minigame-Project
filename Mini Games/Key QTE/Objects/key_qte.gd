@@ -1,5 +1,6 @@
 extends TextureProgressBar
 
+# See MG-QTE.gd for variable descriptions
 var speed: float
 var key: String
 
@@ -9,9 +10,12 @@ var key: String
 @onready var se_success: AudioStreamPlayer = $Success
 @onready var se_failure: AudioStreamPlayer = $Failure
 
+## Emitted when the QTE instance is successfully cleared
 signal qte_instance_success()
+## Emitted when the QTE instance is failed
 signal qte_instance_failure()
 
+# Holds the actual keycode (letter, number, etc)
 var key_literal
 
 func _ready() -> void:
@@ -32,15 +36,18 @@ func _process(delta: float) -> void:
 	value = timer.time_left * 100
 
 func _on_timer_timeout() -> void:
+	# Event fails when timer runs out of time
 	eventFailure()
 
+## On failure, it emits the failure signal and disappears
 func eventFailure() -> void:
 	tint_over = Util.failure_color
 	qte_instance_failure.emit()
 	se_failure.play()
 	await se_failure.finished
 	queue_free()
-	
+
+## On success, it freezes the timer, emits the success signal and disappears
 func eventSuccess() -> void:
 	timer.stop()
 	tint_over = Util.success_color
@@ -49,6 +56,7 @@ func eventSuccess() -> void:
 	await se_success.finished
 	queue_free()
 
+## Connects (in _ready) to MG-QTE's success signal. Upon emitting, triggers the instance success
 func qte_key_success(qte_cleared: TextureProgressBar) -> void:
 	if qte_cleared == self:
 		eventSuccess()
