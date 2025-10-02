@@ -11,7 +11,6 @@
 [node name="KeyQTE" type="TextureProgressBar"]
 offset_right = 256.0
 offset_bottom = 256.0
-scale = Vector2(0.5, 0.5)
 step = 0.1
 value = 100.0
 fill_mode = 4

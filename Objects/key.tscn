@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://onf0ukg4py2y"]
+
+[ext_resource type="Script" uid="uid://c8gwqabe78i8t" path="res://Objects/key.gd" id="1_13sy0"]
+[ext_resource type="AudioStream" uid="uid://ihvk0tbg4xlk" path="res://Assets/Audio/success.wav" id="2_63mlb"]
+[ext_resource type="Texture2D" uid="uid://0qtaj42dqd31" path="res://Assets/Textures/key_bottom.png" id="2_oede5"]
+[ext_resource type="AudioStream" uid="uid://chlpok2poqm7f" path="res://Assets/Audio/fail.wav" id="3_121kn"]
+[ext_resource type="Texture2D" uid="uid://c3s1ye77jayd1" path="res://Assets/Textures/key_surface.png" id="3_dp1xj"]
+[ext_resource type="Texture2D" uid="uid://dspicsk5bv86p" path="res://Assets/Textures/key_charge.png" id="4_4ly8d"]
+[ext_resource type="Theme" uid="uid://yq4wx0ey7r15" path="res://Assets/Themes/qte_char.tres" id="5_oede5"]
+
+[node name="Key" type="Control"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 256.0
+offset_bottom = 256.0
+script = ExtResource("1_13sy0")
+key_type = "Spam"
+progress_strength = 8.0
+decay = true
+decay_speed = 1.0
+
+[node name="Progress" type="TextureProgressBar" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -128.0
+offset_top = -256.0
+offset_right = 128.0
+grow_horizontal = 2
+grow_vertical = 0
+fill_mode = 8
+texture_under = ExtResource("2_oede5")
+texture_over = ExtResource("3_dp1xj")
+texture_progress = ExtResource("4_4ly8d")
+
+[node name="Timer" type="TextureProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_top = -268.0
+offset_right = 116.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.1, 1.1)
+value = 100.0
+fill_mode = 2
+texture_progress = ExtResource("4_4ly8d")
+tint_progress = Color(0.34117648, 0.99607843, 0, 1)
+
+[node name="Key Label" type="RichTextLabel" parent="."]
+z_index = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -78.0
+offset_right = 64.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_oede5")
+text = "?"
+horizontal_alignment = 1
+
+[node name="Timers" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Fail Timer" type="Timer" parent="Timers"]
+
+[node name="Penalty Timer" type="Timer" parent="Timers"]
+
+[node name="Frequency Timer" type="Timer" parent="Timers"]
+
+[node name="Audio" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Success" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("2_63mlb")
+
+[node name="Failure" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("3_121kn")
+volume_db = -18.116
+
+[connection signal="timeout" from="Timers/Fail Timer" to="." method="key_event_failure"]

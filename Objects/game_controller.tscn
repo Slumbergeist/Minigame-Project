@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://07fs5si5rrub"]
+
+[ext_resource type="Script" uid="uid://bnodxpiipqhi2" path="res://Objects/game_controller.gd" id="1_6omcr"]
+
+[node name="Game Controller" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6omcr")
+number_of_keys = 4
+
+[node name="Key Container" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+alignment = 1

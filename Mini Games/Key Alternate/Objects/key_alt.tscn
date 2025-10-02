@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqlo046dya1yo"]
+
+[ext_resource type="Texture2D" uid="uid://0qtaj42dqd31" path="res://Assets/Textures/key_bottom.png" id="1_1c326"]
+[ext_resource type="Texture2D" uid="uid://c3s1ye77jayd1" path="res://Assets/Textures/key_surface.png" id="2_tx6u6"]
+[ext_resource type="Texture2D" uid="uid://bbjcesj2ig6lw" path="res://Assets/Textures/key_fill.png" id="3_4miiq"]
+[ext_resource type="Script" uid="uid://cl0idqtixg265" path="res://Mini Games/Key Alternate/Objects/key_alt.gd" id="4_4miiq"]
+[ext_resource type="Theme" uid="uid://yq4wx0ey7r15" path="res://Assets/Themes/qte_char.tres" id="4_tx6u6"]
+
+[node name="KeyAlt" type="TextureProgressBar"]
+offset_right = 256.0
+offset_bottom = 256.0
+scale = Vector2(0.5, 0.5)
+fill_mode = 5
+texture_under = ExtResource("1_1c326")
+texture_over = ExtResource("2_tx6u6")
+texture_progress = ExtResource("3_4miiq")
+script = ExtResource("4_4miiq")
+
+[node name="TextEdit" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -83.0
+offset_right = 64.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("4_tx6u6")
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Penalty Timer" type="Timer" parent="."]

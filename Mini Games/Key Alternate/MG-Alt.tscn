@@ -1,9 +1,24 @@
-[gd_scene format=3 uid="uid://cgmmfn0kv7e7v"]
+[gd_scene load_steps=2 format=3 uid="uid://cgmmfn0kv7e7v"]
 
-[node name="MG-Alt" type="Control"]
+[ext_resource type="Script" uid="uid://dfqnvcxckjk4h" path="res://Mini Games/Key Alternate/MG-Alt.gd" id="1_amrbj"]
+
+[node name="MG-Alt" type="Control" groups=["Existing Alt Keys"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_amrbj")
+
+[node name="Alt Container" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Fail Timer" type="Timer" parent="."]
