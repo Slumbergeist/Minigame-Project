@@ -19,6 +19,7 @@ key_type = "Spam"
 progress_strength = 8.0
 decay = true
 decay_speed = 1.0
+penalty = true
 
 [node name="Progress" type="TextureProgressBar" parent="."]
 z_index = 1
@@ -83,8 +84,6 @@ offset_bottom = 40.0
 
 [node name="Fail Timer" type="Timer" parent="Timers"]
 
-[node name="Penalty Timer" type="Timer" parent="Timers"]
-
 [node name="Frequency Timer" type="Timer" parent="Timers"]
 
 [node name="Audio" type="Control" parent="."]
@@ -100,3 +99,4 @@ stream = ExtResource("3_121kn")
 volume_db = -18.116
 
 [connection signal="timeout" from="Timers/Fail Timer" to="." method="key_event_failure"]
+[connection signal="timeout" from="Timers/Frequency Timer" to="." method="set_key"]
